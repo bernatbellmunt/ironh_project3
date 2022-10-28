@@ -1,4 +1,5 @@
 .env
-.trial1_net
-.trial1
 .DS_Store
+
+trials/trial1_net.ipynb
+trials/trial1.ipynb
