@@ -170,3 +170,26 @@ def clean_coord(list_):
         else:
             clean_coord.append(list_[i][0])
     return clean_coord
+
+
+def get_avg_distance_from_list (list_dist):
+    avg_distance_list =[]
+    for dist in list_dist:
+        avg_distance = sum(dist)/len(dist)
+        avg_distance_list.append(avg_distance)
+    return avg_distance_list
+
+def get_multiquery_dist(query,latitude,longitude):
+
+    url = f"https://api.foursquare.com/v3/places/nearby?ll={latitude}%2C{longitude}&query={query}"
+
+    headers = {
+        "accept": "application/json",
+        "Authorization": f"{key}"}
+    response = requests.get(url, headers=headers).json()
+    newlist=[]
+    for lista in response["results"]:
+        distance = lista["distance"]
+        newlist.append(distance)
+
+    return newlist
