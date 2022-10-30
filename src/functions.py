@@ -193,3 +193,18 @@ def get_multiquery_dist(query,latitude,longitude):
         newlist.append(distance)
 
     return newlist
+
+def scrape_table(url, table, class_):
+    '''This function receives a string url, the table "class"
+    and the class of that table. 
+    It returns a dataframe for the table in that url'''
+    
+    response = requests.get(url)
+    soup = BeautifulSoup(response.text, 'html.parser')
+    table = soup.find(table, {'class':class_}).tbody
+    rows = table.find_all('tr')
+    rows = list(rows)
+    rows = [list(row) for row in rows]
+    df_url = pd.DataFrame(rows).astype(str)
+    
+    return df_url
