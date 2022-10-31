@@ -18,7 +18,7 @@ After asking my employees this are the conclusions:
 - Presence of Design Companies in my city
 - Presence of successful tech startups
 
-As I want the best for employees, I will add too, the average wage / cost of live into my formula.
+As I want the best for employees, I will add too, the average wage / cost of living index into my formula.
 
 **Knowing all this, lets find our best office!**
 
