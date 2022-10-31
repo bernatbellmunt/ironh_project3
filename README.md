@@ -2,6 +2,7 @@
 Bernat Bellmunt Cabutí
 
 Well after several rounds of investements and multiple months working on remote, I need to find an office for my new gaming company **Catacrack Gaming**.
+
 ![](images/future-gaming.gif)
 
 
