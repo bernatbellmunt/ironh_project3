@@ -208,3 +208,19 @@ def scrape_table(url, table, class_):
     df_url = pd.DataFrame(rows).astype(str)
     
     return df_url
+
+
+
+def check_coord(latitude,longitude):
+
+    url = f"https://api.foursquare.com/v3/places/nearby?ll={latitude}%2C{longitude}&limit=1"
+
+    headers = {
+        "accept": "application/json",
+        "Authorization": f"{key}"}
+    response = requests.get(url, headers=headers).json()
+    country = []
+    for lista in response["results"]:
+        country_code = lista["location"]["country"]
+        country.append(country_code)
+    return country
