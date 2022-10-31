@@ -56,36 +56,6 @@ def get_query_dist(query,latitude,longitude):
 
     return newlist
 
-def get_query_to_map(query,latitude,longitude):
-
-    url = f"https://api.foursquare.com/v3/places/nearby?ll={latitude}%2C{longitude}&query={query}&limit=10"
-
-    headers = {
-        "accept": "application/json",
-        "Authorization": f"{key}"}
-    response = requests.get(url, headers=headers).json()
-    newlist=[]
-    for lista in response["results"]:
-        lat= lista["geocodes"]["main"]["latitude"]
-        long = lista["geocodes"]["main"]["longitude"]
-        name = lista["name"]
-        
-        newlist.append({"name":name,"lat":lat,"long":long})
-    
-    df = pd.DataFrame(newlist)
-    mapa = Map(location = [latitude,longitude], zoom_start=10)
-    for index,row in df.iterrows():
-
-        #primer iconi, depres marcador
-        icono = {"location":[row["lat"],row["long"]]}
-
-        marker = Marker(**icono)
-
-
-        marker.add_to(mapa)
-
-    return mapa
-
 
 def get_coord_category(cat,latitude,longitude):
 
@@ -224,3 +194,97 @@ def check_coord(latitude,longitude):
         country_code = lista["location"]["country"]
         country.append(country_code)
     return country
+
+def get_multicoord(query,latitude,longitude):
+
+    url = f"https://api.foursquare.com/v3/places/nearby?ll={latitude}%2C{longitude}&query={query}"
+
+    headers = {
+        "accept": "application/json",
+        "Authorization": f"{key}"}
+    response = requests.get(url, headers=headers).json()
+    newlist=[]
+    for lista in response["results"]:
+        lat= lista["geocodes"]["main"]["latitude"]
+        long = lista["geocodes"]["main"]["longitude"]
+        newlist.append([lat,long])
+
+    return newlist
+
+def get_query_coordenades(query,latitude,longitude):
+
+    url = f"https://api.foursquare.com/v3/places/nearby?ll={latitude}%2C{longitude}&query={query}&limit=1"
+
+    headers = {
+        "accept": "application/json",
+        "Authorization": f"{key}"}
+    response = requests.get(url, headers=headers).json()
+    newlist=[]
+    for lista in response["results"]:
+        lat= lista["geocodes"]["main"]["latitude"]
+        long = lista["geocodes"]["main"]["longitude"]
+        newlist.append(lat)
+        newlist.append(long)
+
+    return newlist
+
+def get_singlequery_to_map(query,latitude,longitude):
+
+    url = f"https://api.foursquare.com/v3/places/nearby?ll={latitude}%2C{longitude}&query={query}&limit=1"
+
+    headers = {
+        "accept": "application/json",
+        "Authorization": f"{key}"}
+    response = requests.get(url, headers=headers).json()
+    newlist=[]
+    for lista in response["results"]:
+        lat= lista["geocodes"]["main"]["latitude"]
+        long = lista["geocodes"]["main"]["longitude"]
+        name = lista["name"]
+        
+        newlist.append({"name":name,"lat":lat,"long":long})
+    
+    df = pd.DataFrame(newlist)
+    mapa = Map(location = [latitude,longitude], zoom_start=10)
+    for index,row in df.iterrows():
+
+        #primer iconi, depres marcador
+        icono = {"location":[row["lat"],row["long"]]}
+
+        marker = Marker(**icono)
+
+
+        marker.add_to(mapa)
+
+    return mapa
+
+
+def get_query_to_map(query,latitude,longitude):
+
+    url = f"https://api.foursquare.com/v3/places/nearby?ll={latitude}%2C{longitude}&query={query}&limit=10"
+
+    headers = {
+        "accept": "application/json",
+        "Authorization": f"{key}"}
+    response = requests.get(url, headers=headers).json()
+    newlist=[]
+    for lista in response["results"]:
+        lat= lista["geocodes"]["main"]["latitude"]
+        long = lista["geocodes"]["main"]["longitude"]
+        name = lista["name"]
+        
+        newlist.append({"name":name,"lat":lat,"long":long})
+    
+    df = pd.DataFrame(newlist)
+    mapa = Map(location = [latitude,longitude], zoom_start=10)
+    for index,row in df.iterrows():
+
+        #primer iconi, depres marcador
+        icono = {"location":[row["lat"],row["long"]]}
+
+        marker = Marker(**icono)
+
+
+        marker.add_to(mapa)
+
+    return mapa
